@@ -1,9 +1,18 @@
-# Ignore generated directories
+# Ignore heavy or generated directories
 cache/
 experiments/
 LIBERO/
 outputs/
 
-# Ignore scripts and Python caches
+# Ignore temporary files and scripts
 run.sh
+
+# Ignore Python cache dirs everywhere
 __pycache__/
+
+# (Optional) Common Python extras
+*.pyc
+*.pyo
+*.log
+.env
+.venv/
