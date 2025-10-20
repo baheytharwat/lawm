@@ -3,6 +3,7 @@ cache/
 experiments/
 LIBERO/
 outputs/
+data/
 
 # Ignore temporary files and scripts
 run.sh
