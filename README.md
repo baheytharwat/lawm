@@ -1,5 +1,9 @@
 # Latent Action Pretraining Through World Modeling  
-### Bahey Tharwat · Yara Nasser · Ali Abouzeid · Ian Reid  
+### Bahey Tharwat¹ · Yara Nasser² · Ali Abouzeid¹ · Ian Reid¹  
+
+¹ Mohamed bin Zayed University of Artificial Intelligence (MBZUAI)  
+² Alexandria University  
+
 
 [![arXiv](https://img.shields.io/badge/arXiv-2509.18428-b31b1b.svg)](https://arxiv.org/abs/2509.18428)
 [![Project Page](https://img.shields.io/badge/Project%20Page-Visit-blue.svg)](https://yaranasserr.github.io/lawm-paper/)
