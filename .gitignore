@@ -1,0 +1,9 @@
+# Ignore generated directories
+cache/
+experiments/
+LIBERO/
+outputs/
+
+# Ignore scripts and Python caches
+run.sh
+__pycache__/
