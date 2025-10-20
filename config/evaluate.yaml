@@ -1,0 +1,33 @@
+defaults:
+  - task: libero
+  - algo: diffusion_policy
+  - _self_
+
+mode: evaluate  # Mode can be 'evaluate' or 'export'
+video_mode: mp4  # Can be 'mp4' or 'images'
+
+exp_name: debug # 
+variant_name: null
+seed: 10000
+device: cuda:0
+output_prefix: ./experiments
+data_prefix: ./data
+make_unique_experiment_dir: false # I would not recommend enabling this for the eval script
+save_hdf5: false
+
+checkpoint_path: null
+
+training:
+  use_tqdm: true
+  n_epochs: 0
+  do_profile: false
+  resume: false
+  load_obs: false
+
+rollout:
+  enabled: true
+  interval: 10
+  rollouts_per_env: 10
+  max_episode_length: ${task.horizon}
+  num_parallel_envs: 10
+  n_video: 0

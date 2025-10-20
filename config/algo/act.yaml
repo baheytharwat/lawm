@@ -1,0 +1,37 @@
+defaults:
+  - chunk_base
+  - _self_
+
+policy:
+  _target_: lawm.algos.act.ACT
+  act_model:
+    _target_: lawm.algos.utils.act_utils.detr_vae.DETRVAE
+    _partial_: true
+    transformer:
+      _target_: lawm.algos.utils.act_utils.transformer.build_transformer
+      hidden_dim: ${algo.embed_dim}
+      dropout: 0.1
+      nheads: 8
+      dim_feedforward: ${eval:'${algo.embed_dim} * 4'}
+      enc_layers: 4
+      dec_layers: 7
+      pre_norm: false
+    encoder:
+      _target_: lawm.algos.utils.act_utils.detr_vae.build_encoder
+      hidden_dim: 256
+      nheads: 8
+      dim_feedforward: ${eval:'${algo.embed_dim} * 4'}
+      enc_layers: 4
+      pre_norm: false
+      dropout: 0.1
+    num_queries: ${algo.chunk_size}
+  loss_fn:
+    _target_: torch.nn.L1Loss
+  kl_weight: ${algo.kl_weight}
+
+name: act
+
+kl_weight: 10.0
+
+embed_dim: 256 # stage 2 transformer hidden dim
+

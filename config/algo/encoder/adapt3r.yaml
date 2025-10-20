@@ -1,0 +1,38 @@
+defaults:
+  - base
+  - _self_
+
+_target_: lawm.algos.encoders.lawm.Adapt3rEncoder
+backbone_type: clip
+pointcloud_extractor_factory:
+  _target_: lawm.algos.utils.pointnet_extractor.AttentionExtractor
+  _partial_: true
+  out_channels: ${algo.embed_dim}
+  use_layernorm: false
+  final_norm: "none"
+  hidden_dim: 256
+  num_heads: 4
+lowdim_encoder_factory:
+  _target_: lawm.algos.utils.mlp_proj.MLPProj
+  _partial_: true
+  output_size: ${algo.lowdim_embed_dim}
+  num_layers: 1
+num_points: 512
+hidden_dim: 60
+task_suite_name: ${task.suite_name}
+task_benchmark_name: ${task.benchmark_name}
+finetune: false
+hand_frame: true
+do_crop: true
+tight_crop: true
+do_hand_crop: true
+downsample_mode: feat
+xyz_proj_type: nerf
+do_image: true
+do_lang: true
+use_old_hand_frame_crop: false
+clip_model: RN50
+
+
+load_image: true
+load_depth: true

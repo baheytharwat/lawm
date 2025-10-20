@@ -1,0 +1,49 @@
+defaults:
+  - chunk_base
+  - _self_
+
+policy:
+  _target_: lawm.algos.diffusion_policy.DiffusionPolicy
+  diffusion_model_factory:
+    _target_: lawm.algos.diffusion_policy.DiffusionModel
+    _partial_: true
+    noise_scheduler: 
+      _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+      num_train_timesteps: ${algo.diffusion_train_steps}
+      beta_schedule: squaredcos_cap_v2
+    global_cond_dim: ${eval:'${algo.embed_dim} + ${algo.lang_emb_dim}'}
+    diffusion_step_emb_dim: ${algo.diffusion_step_emb_dim}
+    down_dims: [256,512,1024]
+    chunk_size: ${algo.chunk_size}
+    diffusion_inf_steps: ${algo.diffusion_inf_steps}
+    device: ${device}
+  ema_factory:
+    _target_: diffusers.training_utils.EMAModel
+    _partial_: true
+    decay: 0.9999
+    use_ema_warmup: false
+    inv_gamma: 1.0
+    power: 0.75
+  
+  embed_dim: ${algo.embed_dim}
+  device: ${device}
+  apply_wm: ${task.apply_wm}
+
+encoder:
+  image_encoder_factory:
+    replace_bn_with_gn: true
+
+
+name: diffusion_policy
+
+lowdim_embed_dim: 128
+image_embed_dim: ${algo.embed_dim} 
+diffusion_step_emb_dim: ${algo.embed_dim}
+lang_emb_dim: ${algo.embed_dim} # clip embedding size
+embed_dim: 256
+
+diffusion_train_steps: 100
+diffusion_inf_steps: 10
+
+
+

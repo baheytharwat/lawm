@@ -1,0 +1,64 @@
+defaults:
+  - task: bdv2
+  - algo: baku
+  - _self_
+
+exp_name: debug # 
+variant_name: null # This parameter is used to identify the variant within the experiment. It's main uses are file naming and wandb grouping
+seed: 10000
+device: cuda:0
+output_prefix: ./experiments
+data_prefix: ./data
+make_unique_experiment_dir: false
+logging_folder: training
+normalize_action: true
+normalize_obs: false
+
+checkpoint_path: null
+init_from_pretrained: false
+
+train_dataloader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: ${algo.batch_size}
+  shuffle: true
+  num_workers: 8
+  persistent_workers: true
+  pin_memory: true
+  multiprocessing_context: fork
+
+training:
+  # training
+  n_epochs: 101
+  grad_clip: 100.
+  save_interval: 10
+  log_interval: 100
+  use_amp: false
+  use_tqdm: false
+  do_profile: false
+  save_all_checkpoints: true
+  load_obs: true
+  cut: 0
+
+  # resume training
+  resume: true
+  resume_path: ""
+
+rollout:
+  enabled: false
+  interval: 10
+  rollouts_per_env: ${eval:'10 if ${task.n_tasks} == 1 else 1'}
+  max_episode_length: ${task.horizon}
+  n_video: 0
+  num_parallel_envs: 1
+
+
+logging:
+  group: null
+  mode: online # set logging.mode=disabled to disable wandb
+  project: cleanup
+  resume: true
+  save_code: true
+
+
+
+

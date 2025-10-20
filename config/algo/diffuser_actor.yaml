@@ -1,0 +1,27 @@
+defaults:
+  - chunk_base
+  - _self_
+  - override encoder: diffuser_actor
+
+name: diffuser_actor
+lang_emb_dim: 256
+action_horizon: 12
+abs_action: true
+embed_dim: 120
+temporal_agg: false
+
+policy:
+  _target_: lawm.algos.diffuser_actor.DiffuserActor
+  normalizer:
+    mode: identity
+  embedding_dim: ${algo.embed_dim}
+  use_instruction: True
+  diffusion_timesteps: 100
+  inference_timesteps: 10
+  nhist: ${algo.frame_stack}
+  relative: False
+  lang_enhanced: False
+  do_crop: true
+  task_suite_name: ${task.suite_name}
+  task_benchmark_name: ${task.benchmark_name}
+

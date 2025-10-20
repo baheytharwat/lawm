@@ -1,0 +1,93 @@
+defaults:
+  device: cuda
+  precision: 32
+  batch_size: 256
+  batch_length: 10
+  num_actions: 7
+
+  act: SiLU
+  norm: none
+  
+  model_size: 50m
+
+  dyn_mean_act: none
+  dyn_std_act: softplus
+  dyn_min_std: 0.1
+  dyn_rec_depth: 1
+  initial: learned
+  kl_free: 1.0
+  dyn_scale: 0.5
+  rep_scale: 0.1
+  
+
+  grad_heads: [decoder]
+
+  model_lr: 0.0006
+  opt_eps: 0.00001
+  grad_clip: 1000.0
+  weight_decay: 0.0
+  opt: adam
+
+  encoder:
+    cnn_keys: image
+    mlp_keys: []
+    act: SiLU
+    norm: none
+    kernel_size: 4
+    minres: 4
+    mlp_layers: 2
+    mlp_units: 256
+    cnn_depth: 16
+    symlog_inputs: false
+
+  decoder:
+    cnn_keys: image
+    mlp_keys: []
+    act: SiLU
+    norm: none
+    kernel_size: 5
+    minres: 4
+    mlp_layers: 2
+    mlp_units: 256
+    cnn_depth: 16
+    cnn_sigmoid: false
+    image_dist: mse
+    vector_dist: symlog_mse
+    outscale: 1.0
+
+# === MODEL SIZE PROFILES ===
+
+size1m: &size1m
+  .*\.rssm: {deter: 512, hidden: 64, classes: 4}
+  .*\.depth: 4
+  .*\.units: 64
+
+size12m: &size12m
+  .*\.rssm: {deter: 2048, hidden: 256, classes: 16}
+  .*\.depth: 16
+  .*\.units: 256
+
+size25m: &size25m
+  .*\.rssm: {deter: 3072, hidden: 384, classes: 24}
+  .*\.depth: 24
+  .*\.units: 384
+
+size50m: &size50m
+  .*\.rssm: {deter: 4096, hidden: 512, classes: 32}
+  .*\.depth: 32
+  .*\.units: 512
+
+size100m: &size100m
+  .*\.rssm: {deter: 6144, hidden: 768, classes: 48}
+  .*\.depth: 48
+  .*\.units: 768
+
+size200m: &size200m
+  .*\.rssm: {deter: 8192, hidden: 1024, classes: 64}
+  .*\.depth: 64
+  .*\.units: 1024
+
+size400m: &size400m
+  .*\.rssm: {deter: 12288, hidden: 1536, classes: 96}
+  .*\.depth: 96
+  .*\.units: 1536

@@ -1,0 +1,23 @@
+defaults:
+  - chunk_base
+  - _self_
+
+policy:
+  _target_: lawm.algos.baku.Baku
+  hidden_dim: 256
+  std: 0.1
+  frame_stack: ${algo.frame_stack}
+  embed_dim: ${algo.embed_dim}
+  policy_head: deterministic
+  apply_wm: ${task.apply_wm}
+  eecf: ${algo.eecf}
+  normalizer: 
+    mode: identity
+
+
+name: baku
+
+embed_dim: 256
+action_horizon: 2
+
+abs_action: false

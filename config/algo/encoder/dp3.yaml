@@ -1,0 +1,28 @@
+defaults:
+  - base
+  - _self_
+
+_target_: lawm.algos.encoders.dp3.DP3Encoder
+backbone_type: clip
+pointcloud_extractor_factory:
+  _target_: lawm.algos.utils.pointnet_extractor.MaxExtractor
+  _partial_: true
+  out_channels: ${algo.embed_dim}
+  use_layernorm: false
+  final_norm: "none"
+  block_channel: [256, 256, 256, 512]
+lowdim_encoder_factory:
+  _target_: lawm.algos.utils.mlp_proj.MLPProj
+  _partial_: true
+  output_size: ${algo.lowdim_embed_dim}
+  num_layers: 1
+num_points: 512
+task_suite_name: ${task.suite_name}
+task_benchmark_name: ${task.benchmark_name}
+do_rgb: false
+do_hand_crop: false
+
+
+
+load_image: ${algo.encoder.do_rgb}
+load_depth: true
