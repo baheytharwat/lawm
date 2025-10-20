@@ -86,7 +86,7 @@ cd ..
 ```
 #### LIBERO Data
 
-First download the dataset. Note that our code base assumes the data is stored in a folder titled `data/` within the Adapt3r repository. If you would like to store it somewhere else please create a symlink. 
+First download the dataset. Note that our codebase assumes the data is stored in a folder titled `data/` within the repository.
 
 Download the data into `data/` by running
 ```bash
@@ -197,7 +197,7 @@ This demonstrates that our latent-action world-model approach effectively captur
 
 
 ## Citation  
-If you use this code or project, please cite:  
+If you find this work useful, please use the following citation:
 ```
 @article{tharwat2025latent,
   title={Latent Action Pretraining Through World Modeling},
