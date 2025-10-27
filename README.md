@@ -54,7 +54,7 @@ Overview of **LAWM**, which consists of two stages : (a) Latent Action Pretraini
    ```bash
    conda create -n lawm python=3.10
    conda activate lawm
-   pip install -r requirements.txt
+   pip install -e .
    ```  
 3. Download / prepare the datasets (see [Data Preprocessing](#data-preprocessing)).  
 4. Run training, finetuning, or evaluation as described below.
