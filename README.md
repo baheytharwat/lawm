@@ -96,7 +96,7 @@ Note that this file renames the data such that, for LIBERO-90, it is stored in `
 
 Then, process it into a format that is suitable for our training by running 
 ```bash
-python scripts/process_libero_data.py  task=libero_90
+python scripts/process_libero_data.py  task=libero
 ```
 
 
