@@ -21,7 +21,7 @@ bimanual: false
 task_embedding_format: ${algo.encoder.task_embedding_format}
 img_height: 128
 img_width: 128
-horizon: 500
+horizon: 300
 
 apply_wm: false
 
